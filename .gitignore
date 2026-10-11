@@ -1,0 +1,49 @@
+# ==============================================================================
+# GITIGNORE: FSB E-STATEMENT STREAMLIT REPOSITORY
+# Mengabaikan semua file selain yang dibutuhkan untuk aplikasi Streamlit
+# ==============================================================================
+
+# Python & Environment Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Jupyter Notebooks & Eksperimen
+*.ipynb
+*.ipynb_checkpoints/
+*backup*.ipynb
+
+# Gambar & Aset Screenshot Mentah
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+PostgreSQL Load data.png
+
+# Agent & Local IDE Configs
+.agents/
+skills-lock.json
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Artifacts
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary & Log Files
+*.log
+*.tmp
+*.bak
