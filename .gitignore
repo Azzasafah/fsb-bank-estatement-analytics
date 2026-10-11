@@ -1,49 +1,18 @@
 # ==============================================================================
-# GITIGNORE: FSB E-STATEMENT STREAMLIT REPOSITORY
-# Mengabaikan semua file selain yang dibutuhkan untuk aplikasi Streamlit
+# ABAIKAN SEMUANYA KECUALI FILE YANG BERKAITAN DENGAN STREAMLIT
 # ==============================================================================
 
-# Python & Environment Artifacts
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-.venv/
+# 1. Abaikan semua file dan folder di root
+/*
+.*
 
-# Jupyter Notebooks & Eksperimen
-*.ipynb
-*.ipynb_checkpoints/
-*backup*.ipynb
+# 2. Buka izin folder konfigurasi Streamlit
+!/.streamlit/
+!/.streamlit/**
 
-# Gambar & Aset Screenshot Mentah
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.svg
-PostgreSQL Load data.png
-
-# Agent & Local IDE Configs
-.agents/
-skills-lock.json
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS Artifacts
-.DS_Store
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Temporary & Log Files
-*.log
-*.tmp
-*.bak
+# 3. Whitelist HANYA file yang dibutuhkan untuk menjalankan Streamlit di GitHub
+!/.gitignore
+!/README.md
+!/requirements.txt
+!/app.py
+!/fsb_estatement_transaction.csv
