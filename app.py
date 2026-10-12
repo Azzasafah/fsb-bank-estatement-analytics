@@ -654,16 +654,15 @@ with tab_account:
             'Saldo Akhir (Rp)', 'Bank Lawan', 'Remark Transaksi'
         ]
         
-        st.dataframe(
-            tbl_show.style.format({
-                'Kredit (Rp)': '{:,.0f}',
-                'Debit (Rp)': '{:,.0f}',
-                'Biaya Admin (Rp)': '{:,.0f}',
-                'Saldo Akhir (Rp)': '{:,.0f}'
-            }),
-            use_container_width=True,
-            height=280
-        )
+        # Pre-format kolom secara eksplisit agar bebas dari bug PyArrow Styler OverflowError
+        tbl_display = tbl_show.copy()
+        tbl_display['Waktu Transaksi'] = tbl_display['Waktu Transaksi'].astype(str)
+        tbl_display['Kredit (Rp)'] = tbl_display['Kredit (Rp)'].apply(lambda x: f"{x:,.0f}" if pd.notnull(x) else "0")
+        tbl_display['Debit (Rp)'] = tbl_display['Debit (Rp)'].apply(lambda x: f"{x:,.0f}" if pd.notnull(x) else "0")
+        tbl_display['Biaya Admin (Rp)'] = tbl_display['Biaya Admin (Rp)'].apply(lambda x: f"{x:,.0f}" if pd.notnull(x) else "0")
+        tbl_display['Saldo Akhir (Rp)'] = tbl_display['Saldo Akhir (Rp)'].apply(lambda x: f"{x:,.0f}" if pd.notnull(x) else "0")
+        
+        st.dataframe(tbl_display, use_container_width=True, height=280)
         
         csv_download = tbl_show.to_csv(index=False).encode('utf-8')
         st.download_button(
@@ -802,7 +801,8 @@ with tab_arch:
         
     st.markdown("<div style='height: 14px;'></div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Pratinjau Tabel Fakta Akhir (`fsb_estatement_transaction.csv`)</div>", unsafe_allow_html=True)
-    st.dataframe(df_filtered.head(8), use_container_width=True)
+    preview_cols = [c for c in df_filtered.columns if c != 'date']
+    st.dataframe(df_filtered[preview_cols].head(8).astype(str), use_container_width=True)
 
 # ==============================================================================
 # 7. FOOTER
